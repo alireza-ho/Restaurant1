@@ -1,0 +1,68 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <iostream>
+#include <string>
+
+class Dog {
+private:
+    std::string name;
+    int birthYear;
+    int points;
+
+public:
+    Dog(std::string dogName, int dogBirthYear) : name(dogName), birthYear(dogBirthYear), points(0) {}
+
+    int getAge(int currentYear) {
+        return currentYear - birthYear;
+    }
+
+    void bark() {
+        std::cout << name << " is barking: Woof! Woof!" << std::endl;
+    }
+
+    void learn() {
+        points++;
+    }
+
+    void printInfo(int currentYear) {
+        std::cout << "Dog's Name: " << name << std::endl;
+        std::cout << "Dog's Age: " << getAge(currentYear) << " years" << std::endl;
+        std::cout << "Learning Points: " << points << std::endl;
+    }
+};
+
+int main() {
+    std::string name;
+    int birthYear, currentYear;
+
+    std::cout << "Enter dog's name: ";
+    std::cin >> name;
+    std::cout << "Enter dog's birth year: ";
+    std::cin >> birthYear;
+    std::cout << "Enter current year: ";
+    std::cin >> currentYear;
+
+    Dog myDog(name, birthYear);
+
+    int choice;
+    do {
+        std::cout << "Enter 1 to bark, 2 to learn a new skill, 3 to continue, 0 to print info and exit: ";
+        std::cin >> choice;
+
+        if (choice == 1) {
+            myDog.bark();
+        } else if (choice == 2) {
+            myDog.learn();
+        }
+    } while (choice != 0);
+
+    myDog.printInfo(currentYear);
+
+    return 0;
+}
