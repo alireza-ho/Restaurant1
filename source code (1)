@@ -1,0 +1,79 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <iostream>
+#include <string>
+
+// تابع اعتبارسنجی شماره کارت با استفاده از الگوریتم Luhn
+bool isValidCard(const std::string& cardNumber) {
+    int sum = 0;
+    bool alternate = false;
+
+    for (int i = cardNumber.length() - 1; i >= 0; --i) {
+        int n = cardNumber[i] - '0';
+
+        if (alternate) {
+            n *= 2;
+            if (n > 9) {
+                n -= 9;
+            }
+        }
+        sum += n;
+        alternate = !alternate;
+    }
+
+    return (sum % 10 == 0);
+}
+
+// تابع تشخیص بانک مربوطه
+std::string getBankName(const std::string& cardNumber) {
+    if (cardNumber.substr(0, 6) == "603799") {
+        return "MELI";
+    } else if (cardNumber.substr(0, 6) == "589210") {
+        return "SEPAH";
+    } else if (cardNumber.substr(0, 6) == "627353") {
+        return "TEJARAT";
+    } else if (cardNumber.substr(0, 6) == "621986") {
+        return "SAMAN";
+    } else if (cardNumber.substr(0, 6) == "622106") {
+        return "PARSIAN";
+    }
+    // شما می‌توانید سایر بانک‌ها را نیز اضافه کنید.
+    return "UNKNOWN";
+}
+
+// تابع چاپ شماره کارت با فرمت مشخص شده
+void printCardInfo(const std::string& cardNumber, const std::string& bankName) {
+    std::cout << "CARD:" 
+              << cardNumber.substr(0, 4) << "-" 
+              << cardNumber.substr(4, 4) << "-" 
+              << cardNumber.substr(8, 4) << "-" 
+              << cardNumber.substr(12, 4) << std::endl;
+    std::cout << "BANK:" << bankName << std::endl;
+}
+
+int main() {
+    std::string cardNumber;
+
+    std::cout << "Enter your 16-digit card number: ";
+    std::cin >> cardNumber;
+
+    if (cardNumber.length() != 16) {
+        std::cout << "Invalid card number length." << std::endl;
+        return 1;
+    }
+
+    if (isValidCard(cardNumber)) {
+        std::string bankName = getBankName(cardNumber);
+        printCardInfo(cardNumber, bankName);
+    } else {
+        std::cout << "Invalid card number." << std::endl;
+    }
+
+    return 0;
+}
