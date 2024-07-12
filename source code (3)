@@ -1,0 +1,59 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <iostream>
+#include <string>
+
+class Car {
+public:
+    std::string brand;
+    std::string model;
+    int kilometers;
+
+    // Constructor
+    Car(std::string carBrand, std::string carModel, int initialKilometers)
+        : brand(carBrand), model(carModel), kilometers(initialKilometers) {}
+
+    // Method to drive the car and increase kilometers
+    void drive(int distance) {
+        kilometers += distance;
+    }
+
+    // Method to show car data
+    void showData() {
+        std::cout << "Brand: " << brand << std::endl;
+        std::cout << "Model: " << model << std::endl;
+        std::cout << "Distance driven: " << kilometers << "km" << std::endl;
+    }
+};
+
+int main() {
+    std::string brand, model;
+    int initialKilometers, distance;
+
+    // Getting car details from user
+    std::cout << "Enter car brand: ";
+    std::getline(std::cin, brand);
+    std::cout << "Enter car model: ";
+    std::getline(std::cin, model);
+    std::cout << "Enter initial kilometers: ";
+    std::cin >> initialKilometers;
+
+    // Creating a Car object
+    Car myCar(brand, model, initialKilometers);
+
+    // Performing drive operation
+    std::cout << "Enter kilometers to drive: ";
+    std::cin >> distance;
+    myCar.drive(distance);
+
+    // Displaying car information
+    myCar.showData();
+
+    return 0;
+}
