@@ -1,0 +1,55 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+
+#include <iostream>
+#include <string>
+
+const double TAX_RATE = 0.09; // 9% ارزش افزوده
+
+struct Item {
+    int code;
+    std::string name;
+    double price;
+};
+
+Item foods[] = {{1, "Burger", 5.99}, {2, "Pizza", 7.99}, {3, "Pasta", 6.99}};
+Item drinks[] = {{1, "Water", 1.00}, {2, "Soda", 1.50}, {3, "Juice", 2.00}};
+Item starters[] = {{1, "Salad", 3.50}, {2, "Soup", 4.00}, {3, "Breadsticks", 2.50}};
+
+double findPrice(Item items[], int size, int code) {
+    for (int i = 0; i < size; ++i) {
+        if (items[i].code == code) {
+            return items[i].price;
+        }
+    }
+    return 0; // کدی معتبر نبود
+}
+
+int main() {
+    int foodCode, drinkCode, starterCode;
+
+    std::cout << "Enter food code: ";
+    std::cin >> foodCode;
+    std::cout << "Enter drink code: ";
+    std::cin >> drinkCode;
+    std::cout << "Enter starter code: ";
+    std::cin >> starterCode;
+
+    double foodPrice = findPrice(foods, 3, foodCode);
+    double drinkPrice = findPrice(drinks, 3, drinkCode);
+    double starterPrice = findPrice(starters, 3, starterCode);
+
+    double subtotal = foodPrice + drinkPrice + starterPrice;
+    double total = subtotal * (1 + TAX_RATE);
+
+    std::cout << "Final amount to be paid: $" << total << std::endl;
+
+    return 0;
+}
